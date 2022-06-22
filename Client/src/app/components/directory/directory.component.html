@@ -1,0 +1,25 @@
+<ng-container *ngIf="currentItem == null">
+    <ng-container *ngIf="head != null">
+        <section class="banner" *ngIf="head.bannerUrl != null">
+            <img class="image" [src]="head.bannerUrl" />
+        </section>
+        <div class="rawhtml" *ngIf="head.introduction != null" [innerHTML]="decode(head.introduction) | rawhtml"></div>
+    </ng-container>
+    <h3 *ngIf="detail.length > 0" class="title">Servicios</h3>
+    <section *ngIf="detail.length > 0" class="detail-container">
+        <div class="detail" *ngFor="let d of detail" (click)="viewItem(d)">
+            <img class="image" [src]="d.iconUrl" />
+        </div>
+    </section>
+</ng-container>
+<ng-container *ngIf="currentItem != null">
+    <section class="banner" *ngIf="currentItem.bannerUrl != null">
+        <img class="image" [src]="currentItem.bannerUrl" />
+    </section>
+    <div class="rawhtml" *ngIf="currentItem.content != null" [innerHTML]="decode(currentItem.content) | rawhtml"></div>
+    <div class="actions">
+        <button (click)="goBack()" class="btn info">
+            <fa-icon [icon]="backIcon"></fa-icon>&nbsp;&nbsp;&nbsp;Regresar
+        </button>
+    </div>
+</ng-container>

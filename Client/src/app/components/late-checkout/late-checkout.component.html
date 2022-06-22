@@ -1,0 +1,42 @@
+<div class="container">
+	<div class="image">
+		<img src="../../../assets/images/latecheckout.png" alt="" />
+	</div>
+	<section class="form">
+		<label>Revisaremos nuestra disponibilidad, déjenos su celular para poder contactarnos y confirmarle el servicio.</label>
+		<app-tooltip [show]="form.prefix.invalid || form.number.invalid" tip="Debe ingresar un prefijo y un número válido.">
+			<div class="phone">
+				<div class="prefix">
+					<label>Prefijo:</label>
+					<input #mPrefix type="number" [(ngModel)]="form.prefix.value" placeholder="Ej. 51" maxlength="2" (change)="validatePrefix()" />
+				</div>
+				<div class="number">
+					<label>Número:</label>
+					<input
+						#mNumber
+						type="number"
+						[(ngModel)]="form.number.value"
+						placeholder="Ej. 999999999"
+						maxlength="9"
+						(change)="validateNumber()"
+					/>
+				</div>
+			</div>
+		</app-tooltip>
+	</section>
+	<div class="options">
+		<div class="title">LATE CHECK-OUT</div>
+		<div *ngFor="let l of latecheckoutlist; index as i" class="item" (click)="showConfirm(i)" [innerHTML]="l.description | rawhtml"></div>
+	</div>
+</div>
+
+<app-modal #mConfirm showFooter="true">
+	<div mheader>
+		<h4>CONFIRMAR LATE CHECK-OUT</h4>
+	</div>
+	<div mbody [innerHTML]="selected == null ? '' : (selected.confirmText | rawhtml)"></div>
+	<div class="evenly" mfooter>
+		<div class="btn neutral" (click)="mConfirm.close()">Cancelar</div>
+		<div class="btn success" (click)="lateCheck()">Confirmar</div>
+	</div>
+</app-modal>

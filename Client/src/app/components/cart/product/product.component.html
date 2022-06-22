@@ -1,0 +1,20 @@
+<section class="producto" [attr.data-target]="model.id">
+	<div *ngIf="model.image != null" class="image">
+		<img src="{{ model.image }}" />
+	</div>
+	<div class="info">
+		<div class="top">
+			<div class="name">{{ model.name }}</div>
+			<div class="price">S/. {{ model.price }}</div>
+			<div *ngIf="model.quantity != null">
+				<app-countmark [count]="model.quantity"></app-countmark>
+			</div>
+		</div>
+		<div class="body">
+			{{ model.description }}
+		</div>
+		<div class="footer" *ngIf="showAddToCart">
+			<div class="add" (click)="addToCart()">+</div>
+		</div>
+	</div>
+</section>

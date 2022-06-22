@@ -1,0 +1,21 @@
+<h3 class="title">{{ title }}</h3>
+<div class="articles">
+    <article *ngFor="let x of detail" class="article">
+        <div class="image">
+            <div class="image-container">
+                <img alt="image" [src]="x.imageUrl" />
+            </div>
+        </div>
+        <div class="name">{{x.title}}</div>
+        <div class="description" [innerHTML]="decode(x.description) | rawhtml"></div>
+        <div class="buttons">
+            <button *ngIf="x.linkUrl != null" class="btn neutral" (click)="openLink(x)">
+                Más información
+            </button>
+            &nbsp;
+            <button *ngIf="x.mapUrl != null" class="btn" (click)="openMap(x)">
+                Ver mapa
+            </button>
+        </div>
+    </article>
+</div>

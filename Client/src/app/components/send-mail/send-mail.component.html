@@ -1,0 +1,41 @@
+<section class="tbar">
+	<div class="back" (click)="goBack()">&lt;</div>
+	<div class="title">Enviar Solicitud</div>
+</section>
+<section class="container">
+	<article class="form">
+		<!-- <app-tooltip [show]="form.prefix.invalid || form.number.invalid"
+            tip="Debe ingresar un prefijo y un número válido.">
+            <div class="phone">
+                <div class="prefix">
+                    <label>Prefijo:</label>
+                    <input class="input" #mPrefix appOnlyNumber [(ngModel)]="form.prefix.value" placeholder="Ej. 51"
+                        maxlength="2" (change)="validatePrefix()" />
+                </div>
+                <div class="number">
+                    <label>Número:</label>
+                    <input class="input" #mNumber appOnlyNumber [(ngModel)]="form.number.value"
+                        placeholder="Ej. 999999999" maxlength="9" (change)="validateNumber()" />
+                </div>
+            </div>
+        </app-tooltip> -->
+		<label>Motivo</label>
+		<app-tooltip [show]="form.reason.invalid" tip="Seleccione un motivo.">
+			<select class="input" [(ngModel)]="form.reason.value">
+				<option [value]="0">[Seleccione]</option>
+				<option *ngFor="let r of reasons" [value]="r.id">{{ r.description }}</option>
+			</select>
+		</app-tooltip>
+		<label>Comentario (máx 500 caracteres)</label>
+		<textarea
+			[(ngModel)]="form.description.value"
+			class="input"
+			placeholder="Coloca aquí tu comentario con el número de ticket"
+			name=""
+			cols="30"
+			rows="6"
+			maxlength="500"
+		></textarea>
+		<div class="btn" (click)="sendMail()">Enviar</div>
+	</article>
+</section>

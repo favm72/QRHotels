@@ -1,0 +1,8 @@
+<label class="container">
+	<button type="button" class="btn" (click)="fileuploader.click()">Cargar&nbsp;&nbsp;<fa-icon [icon]="uploadIcon"></fa-icon></button>
+	<div *ngIf="myfile" class="info">{{ name }} ({{ size }})</div>
+	<div class="error" *ngIf="errorMessage.length > 0">
+		{{ errorMessage }}
+	</div>
+	<input #fileuploader type="file" (change)="handleChange($event)" />
+</label>

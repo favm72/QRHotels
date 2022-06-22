@@ -1,0 +1,13 @@
+<div class="slideshow-container">
+	<div *ngFor="let x of pictures; index as i" class="mySlides fade {{ i == slideIndex ? 'active' : '' }}">
+		<!-- <div class="numbertext">{{ i + 1 }} / {{ pictures.length }}</div> -->
+		<img class="image clickable" *ngIf="x.linkURL != null" [src]="x.imageURL" (click)="clickImage(x.linkURL)" />
+		<img class="image" *ngIf="x.linkURL == null" [src]="x.imageURL" />
+		<!-- <div class="text">Caption 1</div> -->
+	</div>
+	<div *ngIf="pictures.length > 1" class="prev" (click)="prev()">&#10094;</div>
+	<div *ngIf="pictures.length > 1" class="next" (click)="next()">&#10095;</div>
+</div>
+<div class="circles">
+	<span *ngFor="let x of pictures; index as i" class="dot {{ i == slideIndex ? 'active' : '' }}" (click)="current(i)"></span>
+</div>

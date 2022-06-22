@@ -1,0 +1,182 @@
+<h2 class="title">Filtros</h2>
+<hr class="divider" />
+<section class="filter">
+	<article>
+		<label>Hotel</label>
+		<select [(ngModel)]="filter.hotelCode" (change)="loadCategories()">
+			<option [value]="''">[SELECCIONAR]</option>
+			<option *ngFor="let h of hotels" [ngValue]="h.id">{{ h.description }}</option>
+		</select>
+	</article>
+	<article>
+		<label>Outlet</label>
+		<select [(ngModel)]="filter.idProvider" (change)="loadCategories()">
+			<option [value]="0">[SELECCIONAR]</option>
+			<option *ngFor="let p of providers" [ngValue]="p.id">{{ p.description }}</option>
+		</select>
+	</article>
+	<article>
+		<label>Categoría</label>
+		<select [(ngModel)]="filter.idCategory">
+			<option [value]="0">[SELECCIONAR]</option>
+			<option *ngFor="let c of categories" [ngValue]="c.id">{{ c.description }}</option>
+		</select>
+	</article>
+	<article>
+		<label>&nbsp;</label>
+		<button type="button" class="btn info" (click)="search()">Buscar</button>
+	</article>
+</section>
+<h2 class="title">Administrar Productos</h2>
+<hr class="divider" />
+<section class="row">
+	<div class="products">
+		<table class="mytable">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Orden</th>
+					<th>Nombre</th>
+					<th>Precio</th>
+					<th>Activo</th>
+					<th>Edit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="products.length == 0">
+					<td colspan="6">No se encontraron resultados.</td>
+				</tr>
+				<tr *ngFor="let x of products; index as i">
+					<td class="right">
+						<label>{{ x.id }}</label>
+					</td>
+					<td class="right">
+						<label>{{ x.orderNo }}</label>
+					</td>
+					<td>
+						<label>{{ x.name }}</label>
+					</td>
+					<td class="right">
+						<label>{{ x.price | number: "1.2-2" }}</label>
+					</td>
+					<td class="center">
+						<label>{{ x.active ? "SÍ" : "NO" }}</label>
+					</td>
+					<td>
+						<button type="button" (click)="modify(x)" class="btn info edit">
+							<fa-icon [icon]="editIcon"></fa-icon>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="form">
+		<label>&nbsp;</label>
+		<div (click)="switchCategoryMode()">
+			<app-switch [checked]="current.newCategory"></app-switch>
+			<span>{{ current.newCategory ? "Nueva Categoría" : "Seleccionar Categoría existente" }}</span>
+		</div>
+		<ng-container *ngIf="!current.newCategory">
+			<label>Categoría</label>
+			<select [(ngModel)]="current.idCategory" class="input">
+				<option [value]="0">[SELECCIONAR]</option>
+				<option *ngFor="let c of allcategories" [ngValue]="c.id">{{ c.description }}</option>
+			</select>
+		</ng-container>
+		<ng-container *ngIf="current.newCategory">
+			<label>Categoría</label>
+			<input [(ngModel)]="current.categoryName" type="text" maxlength="100" class="input" />
+		</ng-container>
+		<label>Nombre:</label>
+		<input [(ngModel)]="current.name" type="text" maxlength="50" class="input" />
+		<label>Descripción:</label>
+		<textarea [(ngModel)]="current.description" rows="4" maxlength="200" class="input"></textarea>
+		<label>Imagen:</label>
+		<div>
+			<app-uploader [(myfile)]="current.image" [(name)]="current.fileName"></app-uploader>
+			<img *ngIf="current.imageLink?.length > 0" [src]="current.imageLink" class="imageview" alt="image" />
+		</div>
+		<!-- <input [(ngModel)]="current.image" type="text" maxlength="300" class="input" /> -->
+
+		<label>Precio:</label>
+		<input appOnlyDecimal [(ngModel)]="price" type="text" class="input" (blur)="setPrice()" maxlength="6" />
+		<label>Orden:</label>
+		<input appOnlyNumber [(ngModel)]="current.orderNo" type="text" class="input" />
+		<label>Active:</label>
+		<div (click)="switchActive()">
+			<app-switch [checked]="current.active"></app-switch>
+		</div>
+		<label>Modificador:</label>
+		<button type="button" (click)="openModalModifiers()" class="btn info edit inline"><fa-icon [icon]="addIcon"></fa-icon> Agregar</button>
+		<article class="actions">
+			<table class="mytable">
+				<thead>
+					<tr>
+						<th>Descripción</th>
+						<th>Tipo</th>
+						<th>Min-Max</th>
+						<th>Opciones</th>
+						<th>Quitar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngIf="modifiers.length == 0">
+						<td colspan="5">Sin modificadores</td>
+					</tr>
+					<tr *ngFor="let m of modifiers; index as i">
+						<td>{{ m.title }}</td>
+						<td>{{ m.type == "radio" ? "Opción Simple" : "Opción Múltiple" }}</td>
+						<td *ngIf="m.type == 'checkbox'">{{ m.min }}-{{ m.max }}</td>
+						<td *ngIf="m.type == 'radio'">-</td>
+						<td>
+							<div *ngFor="let x of m.items">- {{ m.type == "checkbox" ? x.name : x }}</div>
+						</td>
+						<td>
+							<div class="remove btn danger" (click)="removeModifier(i)">
+								<fa-icon [icon]="removeIcon"></fa-icon>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</article>
+		<article class="actions">
+			<ng-template [ngIf]="mode == 'create'">
+				<button (click)="create()" class="btn success">Registrar</button>
+			</ng-template>
+			<ng-template [ngIf]="mode == 'update'">
+				<button (click)="cancelUpdate()" class="btn neutral">Cancelar</button>
+				<button (click)="update()" class="btn success">Actualizar</button>
+			</ng-template>
+		</article>
+	</div>
+</section>
+<app-modal #mModifier showFooter="true">
+	<div mheader>
+		<h4>Configurar Modificadores</h4>
+	</div>
+	<div mbody>
+		<section class="formModifier">
+			<label>Descripción:</label>
+			<input [(ngModel)]="modifierInput.title" class="input" maxlength="100" />
+			<label>Tipo:</label>
+			<select [(ngModel)]="modifierInput.type" class="input">
+				<option value="radio">Opción Simple</option>
+				<option value="checkbox">Opción Múltiple</option>
+			</select>
+			<ng-template [ngIf]="modifierInput.type == 'checkbox'">
+				<label>Min:</label>
+				<input [(ngModel)]="modifierInput.min" appOnlyNumber class="input" />
+				<label>Max:</label>
+				<input [(ngModel)]="modifierInput.max" appOnlyNumber class="input" />
+			</ng-template>
+			<label>Items (una alternativa por línea)</label>
+			<textarea [(ngModel)]="modifierInput.items" rows="3" maxlength="500" class="input"></textarea>
+		</section>
+	</div>
+	<div class="evenly" mfooter>
+		<div class="btn success" (click)="addModifier()">Agregar</div>
+		<div class="btn neutral" (click)="mModifier.close()">Cancelar</div>
+	</div>
+</app-modal>

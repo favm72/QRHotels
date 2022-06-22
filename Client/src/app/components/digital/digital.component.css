@@ -1,0 +1,8 @@
+.banner {
+	margin-bottom: 5px;
+}
+
+.banner .image {
+	width: 100%;
+	cursor: pointer;
+}

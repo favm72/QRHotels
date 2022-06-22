@@ -1,0 +1,15 @@
+.vs
+*/bin/*
+*/obj/*
+netapi/wwwroot
+netapi/Properties/PublishProfiles
+Client/package-lock.json
+netapi/netapi.csproj.user
+SoapClient/Connected Services/ServiceReference1/Reference.cs
+Client/yarn.lock
+DataLayer/DataLayer.csproj.user
+netapi/appsettings.json
+QRWorker/QRWorker.csproj.user
+Testing/OracleTest.cs
+QRWorker/Properties/PublishProfiles/FolderProfile.pubxml
+QRWorker/Properties/PublishProfiles/FolderProfile.pubxml.user

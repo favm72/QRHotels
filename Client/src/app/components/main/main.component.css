@@ -1,0 +1,45 @@
+.menu-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.menu-container > .banner {
+	width: 100%;
+}
+
+.menu-container > .banner.half {
+	width: 50%;
+}
+
+.banner {
+	padding: 0px 5px;
+}
+
+.banner .title {
+	color: #333333;
+	font-size: 1.3rem;
+	font-weight: bold;
+	padding: 4px 0px;
+}
+
+.banner > .image {
+	width: 100%;
+	/* background-repeat: no-repeat;
+  background-size: cover; */
+	cursor: pointer;
+}
+
+.columns {
+	display: flex;
+}
+.columns > div {
+	flex: 1;
+}
+.columns img {
+	width: 100%;
+	cursor: pointer;
+}

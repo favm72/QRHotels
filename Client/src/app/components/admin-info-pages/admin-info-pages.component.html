@@ -1,0 +1,156 @@
+<h2 class="title">Filtros</h2>
+<hr class="divider" />
+<section class="filter">
+    <article>
+        <label>Hotel</label>
+        <select [(ngModel)]="currentHotel" (change)="onChangeHotel()">
+            <option [value]="''">[SELECCIONAR]</option>
+            <option *ngFor="let h of hotels" [ngValue]="h.id">{{ h.description }}</option>
+        </select>
+    </article>
+    <ng-container *ngIf="currentHotel">
+        <article>
+            <label>&nbsp;</label>
+            <button class="btn info" type="button" (click)="openHeadModal(null)">Agregar página</button>
+        </article>
+    </ng-container>
+</section>
+<h2 class="title">Administrar páginas informativas</h2>
+<hr class="divider" />
+<section class="table-container">
+    <table class="mytable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Activo</th>
+                <th>Edit</th>
+                <th>Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="filteredHeads.length == 0">
+                <td colspan="6">No se encontraron resultados.</td>
+            </tr>
+            <tr *ngFor="let x of filteredHeads; index as i">
+                <td class="right">
+                    <label>{{ x.id }}</label>
+                </td>
+                <td>
+                    <label>{{ x.name }}</label>
+                </td>
+                <td class="center">
+                    <label>{{ x.active ? "SÍ" : "NO" }}</label>
+                </td>
+                <td>
+                    <button type="button" (click)="openHeadModal(x)" class="btn info edit">
+                        <fa-icon [icon]="editIcon"></fa-icon>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" (click)="viewHead(x)" class="btn info edit">
+                        <fa-icon [icon]="searchIcon"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<ng-container *ngIf="viewDetail">
+    <h2 class="title">Items de la página</h2>
+    <hr class="divider" />
+    <div class="evenly actions" mfooter>
+        <div class="btn neutral" (click)="closeDetail()">Cerrar items</div>
+        <div class="btn success" (click)="openDetailModal(null)">Agregar item</div>
+    </div>
+    <section class="table-container">
+        <table class="mytable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Activo</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="detail.length == 0">
+                    <td colspan="6">No se encontraron resultados.</td>
+                </tr>
+                <tr *ngFor="let x of detail; index as i">
+                    <td class="right">
+                        <label>{{ x.id }}</label>
+                    </td>
+                    <td>
+                        <label>{{ x.title }}</label>
+                    </td>
+                    <td class="center">
+                        <label>{{ x.active ? "SÍ" : "NO" }}</label>
+                    </td>
+                    <td>
+                        <button type="button" (click)="openDetailModal(x)" class="btn info edit">
+                            <fa-icon [icon]="editIcon"></fa-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</ng-container>
+<app-modal #modalDetailForm showFooter="true" width="95%">
+    <div class="inmodal" mheader>
+        <h4>Item</h4>
+    </div>
+    <div class="inmodal overflow" mbody>
+        <div class="form">
+            <label>Hotel</label>
+            <select class="input" [disabled]="true">
+                <option>{{ hotelDescription }}</option>
+            </select>
+            <label>Título</label>
+            <input class="input" [(ngModel)]="formDetail.title.value" type="text" />
+            <label>Descripción</label>
+            <quill-editor [styles]="{height: '100px'}" [(ngModel)]="formDetail.description.value"></quill-editor>
+            <label>Ubicación</label>
+            <input class="input" [(ngModel)]="formDetail.mapUrl.value" type="text" />
+            <label>Link</label>
+            <input class="input" [(ngModel)]="formDetail.linkUrl.value" type="text" />
+            <label>Orden</label>
+            <input class="input" [(ngModel)]="formDetail.orderNo.value" type="number" />
+            <label>Activo</label>
+            <app-switch [checked]="formDetail.active.value" (change)="formDetail.active.value = $event.target.checked">
+            </app-switch>
+            <label>Imagen:</label>
+            <div>
+                <app-uploader [(myfile)]="formDetail.image64.value" [(name)]="formDetail.filename.value"></app-uploader>
+                <img *ngIf="formDetail.imageUrl.value?.length > 0" [src]="formDetail.imageUrl.value" class="imageview"
+                    alt="image" />
+            </div>
+        </div>
+    </div>
+    <div class="evenly inmodal" mfooter>
+        <div class="btn neutral" (click)="modalDetailForm.close()">Cancelar</div>
+        <div class="btn success" (click)="saveDetail()">{{ currentDetail ? 'Actualizar' : 'Guardar' }}</div>
+    </div>
+</app-modal>
+
+
+<app-modal #modalHeadForm showFooter="true">
+    <div class="inmodal" mheader>
+        <h4>Página Informativa</h4>
+    </div>
+    <div class="inmodal" mbody>
+        <div class="form">
+            <label>Hotel</label>
+            <select class="input" [disabled]="true">
+                <option>{{ hotelDescription }}</option>
+            </select>
+            <label>Nombre</label>
+            <input class="input" [(ngModel)]="formHead.name.value" type="text" />
+        </div>
+    </div>
+    <div class="evenly inmodal" mfooter>
+        <div class="btn neutral" (click)="modalHeadForm.close()">Cancelar</div>
+        <div class="btn success" (click)="saveHead()">{{ currentHead ? 'Actualizar' : 'Guardar' }}</div>
+    </div>
+</app-modal>

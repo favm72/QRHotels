@@ -1,0 +1,20 @@
+<section class="details">
+	<ng-container *ngFor="let d of detail">
+		<div class="product">
+			<img [src]="d.image" />
+			<div>{{ d.name }}</div>
+		</div>
+		<div class="summary">
+			<label>Cantidad:</label>
+			<div>{{ d.quantity }}</div>
+			<label>Precio:</label>
+			<div>{{ d.price | number: "1.2-2" }}</div>
+			<label>Total Item:</label>
+			<div>{{ d.price * d.quantity | number: "1.2-2" }}</div>
+			<div class="comment" *ngFor="let m of d.modifiers">
+				<b>{{ m.title }}:</b>&nbsp;{{ m.value }}
+			</div>
+			<!-- <div class="comment"><b>Comentario:</b> {{ d.comment }}</div> -->
+		</div>
+	</ng-container>
+</section>

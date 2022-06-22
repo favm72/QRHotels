@@ -1,0 +1,16 @@
+<section class="container">
+	<section class="provider" *ngFor="let p of providers">
+		<label>{{ p.provider }}</label>
+		<hr />
+		<div class="content">
+			<article class="category" *ngFor="let c of p.categories">
+				<label>{{ c.category }}</label>
+				<hr />
+				<div class="product" *ngFor="let x of c.products">
+					<label>{{ x.product }}</label>
+					<app-switch [checked]="x.active" (change)="toggle(x)"></app-switch>
+				</div>
+			</article>
+		</div>
+	</section>
+</section>

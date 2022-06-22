@@ -1,0 +1,122 @@
+.image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.image img {
+	max-width: 100%;
+	max-height: 30vh;
+}
+
+.body {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	padding-bottom: 40px;
+}
+
+.body .top,
+.body .form,
+.body .description {
+	width: 70%;
+}
+
+.body .top {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin-bottom: 5px;
+}
+
+.body .top .name {
+	flex: 1;
+}
+
+.footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+}
+
+.btnadd {
+	text-align: center;
+	padding: 7px 20px;
+	background-color: #d69c4f;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.form .cantidad {
+	display: flex;
+	flex-direction: row;
+}
+
+.form .cantidad input {
+	text-align: center;
+	border-color: grey;
+	flex: 1;
+	border-width: 1px;
+	font-family: arquitecta;
+}
+
+.form .btn {
+	padding: 5px 10px;
+	background-color: gray;
+	border: 1px solid;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+
+.form .label {
+	width: 100%;
+}
+
+.form textarea {
+	padding: 7px;
+	margin: 10px 0px;
+	width: 100%;
+	border-color: grey;
+	border-radius: 10px;
+	resize: vertical;
+	font-family: arquitecta;
+}
+
+.tbar {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: white;
+	width: 100%;
+	padding: 5px;
+	font-size: 1.3rem;
+}
+
+.tbar .back {
+	cursor: pointer;
+	padding: 5px 15px;
+}
+
+.tbar .title {
+	flex: 1;
+	text-align: center;
+}
+
+.modifier-title {
+	font-weight: bold;
+	padding: 8px 0px;
+}
+
+.modifier {
+	padding: 3px 0px;
+	display: grid;
+	grid-template-columns: 30px 1fr;
+	align-items: center;
+}

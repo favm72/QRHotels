@@ -1,0 +1,73 @@
+.producto {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: stretch;
+	padding: 10px;
+	margin: 5px;
+	/* border: solid 1px #333333; */
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+}
+
+.producto:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.producto .image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30%;
+}
+.producto .image img {
+	max-width: 100%;
+	max-height: 100px;
+}
+
+.producto .info {
+	flex: 1;
+	padding: 0px 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.producto .info .body {
+	padding: 10px 0px;
+}
+
+.producto .info .top {
+	display: flex;
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.2rem;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.producto .info .top .name {
+	flex: 2;
+	text-align: center;
+}
+.producto .info .top .price {
+	flex: 1;
+	text-align: center;
+}
+
+.producto .info .footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	text-align: right;
+}
+
+.producto .info .footer .add {
+	padding: 5px 10px;
+	background-color: #333333;
+	color: white;
+	cursor: pointer;
+}

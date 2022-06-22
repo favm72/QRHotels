@@ -1,0 +1,50 @@
+<section class="tbar">
+	<div class="back" (click)="goBack()">&lt;</div>
+	<div class="title" [ngSwitch]="provider">
+		<span *ngSwitchCase="1">SAMA 2GO</span>
+		<span *ngSwitchCase="2">ROOM SERVICE</span>
+		<span *ngSwitchCase="4">DESAYUNO</span>
+		<span *ngSwitchCase="5">POOL BAR</span>
+		<span *ngSwitchDefault>AGREGAR AL CARRITO</span>
+	</div>
+</section>
+<hr />
+<section class="image">
+	<img *ngIf="product.image != null" src="{{ product.image }}" alt="producto" />
+</section>
+<section class="body">
+	<div class="top">
+		<div class="name">{{ product.name }}</div>
+		<div class="price">S/. {{ product.price }}</div>
+	</div>
+	<div class="description">
+		{{ product.description }}
+	</div>
+	<div class="form">
+		<textarea *ngIf="false" [(ngModel)]="product.comment" maxlength="200" rows="5" placeholder="Agrega instucciones o comentarios."></textarea>
+		<label>Cantidad</label>
+		<div class="cantidad">
+			<input type="text" readonly value="{{ product.quantity }}" />
+			<div class="btn" (click)="minus()">-</div>
+			<div class="btn" (click)="plus()">+</div>
+		</div>
+		<div class="modifier-container" *ngFor="let m of modifiers">
+			<app-tooltip [show]="m.invalid" [tip]="m.message">
+				<div class="modifier-title">{{ m.title }}</div>
+				<div class="modifier" *ngFor="let x of m.items">
+					<ng-container *ngIf="m.type == 'radio'">
+						<input [(ngModel)]="m.value" type="radio" [value]="x" [name]="x.title" (change)="validateModifiers()" />
+						<label>{{ x }}</label>
+					</ng-container>
+					<ng-container *ngIf="m.type == 'checkbox'">
+						<input [(ngModel)]="x.value" type="checkbox" [value]="x.value" (change)="validateModifiers()" />
+						<label>{{ x.name }}</label>
+					</ng-container>
+				</div>
+			</app-tooltip>
+		</div>
+	</div>
+</section>
+<div class="footer">
+	<div class="btnadd" (click)="addToCart()">S/. {{ product.totalPrice }} Agregar al Pedido</div>
+</div>

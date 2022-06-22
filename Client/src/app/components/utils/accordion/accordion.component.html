@@ -1,0 +1,8 @@
+<section class="accordion {{ active ? 'active' : '' }}">
+	<header class="title" (click)="toggle()">{{ title }}</header>
+	<div class="panel">
+		<div class="content">
+			<ng-content></ng-content>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,10 @@
+input[type="file"] {
+	display: none;
+}
+.info {
+	font-style: italic;
+}
+.error {
+	font-style: italic;
+	color: var(--danger);
+}

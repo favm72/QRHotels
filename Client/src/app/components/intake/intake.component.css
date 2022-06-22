@@ -1,0 +1,106 @@
+.tbar {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: white;
+	width: 100%;
+	padding: 5px;
+	color: white;
+	background-color: #222;
+	font-family: montserrat;
+	font-size: 1.1rem;
+	border-bottom: 1px solid #ccc;
+}
+
+.tbar .back {
+	cursor: pointer;
+	padding: 5px 15px;
+}
+
+.tbar .title {
+	flex: 1;
+	text-align: center;
+}
+
+.container {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	font-family: montserrat;
+	padding-bottom: 40px;
+}
+
+.total {
+	/* background-color: var(--success); */
+	padding: 5px 8px;
+	/* color: white; */
+	font-size: 1.2rem;
+	font-weight: 800;
+}
+
+.ticket {
+	width: 100%;
+	max-width: 500px;
+	padding: 10px;
+	font-size: 0.7rem;
+}
+
+.ticket .info {
+	border: solid 1px #ccc;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.ticket .info > * {
+	padding: 5px 8px;
+}
+
+.ticket .info > .actions > * {
+	margin-right: 5px;
+	display: inline-flex;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.7rem;
+}
+
+.table > thead {
+	background-color: #ccc;
+}
+
+.table > thead > .fecha,
+.table > thead > .importe {
+	width: 80px;
+}
+
+.table th,
+.table td {
+	padding: 3px;
+	border: 1px solid #ccc;
+}
+
+.table td.center {
+	text-align: center;
+}
+
+.table td.right {
+	text-align: right;
+}
+
+.mail {
+	background-color: white;
+	padding: 5px;
+	font-size: 0.8rem;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}

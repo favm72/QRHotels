@@ -1,0 +1,91 @@
+<section class="tbar">
+	<div class="back" (click)="goBack()">&lt;</div>
+	<div class="title">MI PEDIDO</div>
+</section>
+<hr />
+<section class="form">
+	<div *ngIf="provider == 4" class="date">
+		<article class="control">
+			<label>Fecha de Entrega:</label>
+			<app-tooltip [show]="form.breakfastdate.invalid" tip="Debe ingresar la fecha de desayuno.">
+				<input #mDate type="date" [min]="form.breakfastdate.min" [(ngModel)]="form.breakfastdate.value" (change)="validateDate()" />
+			</app-tooltip>
+		</article>
+		<article class="control">
+			<label>Horario:</label>
+			<app-tooltip [show]="form.schedule.invalid" tip="Debe seleccionar un horario para el desayuno.">
+				<select #mSchedule [(ngModel)]="form.schedule.value" (change)="validateSchedule()">
+					<option [ngValue]="0">[Seleccionar]</option>
+					<option *ngFor="let x of schedule" [ngValue]="x.id">{{ x.description }}</option>
+				</select>
+			</app-tooltip>
+		</article>
+	</div>
+	<article class="control">
+		<label>Celular:</label>
+		<app-tooltip [show]="form.prefix.invalid || form.number.invalid" tip="Debe ingresar un prefijo y un número válido.">
+			<div class="phone">
+				<div class="prefix">
+					<label>Prefijo:</label>
+					<input #mPrefix type="number" [(ngModel)]="form.prefix.value" placeholder="Ej. 51" maxlength="4" (change)="validatePrefix()" />
+				</div>
+				<div class="number">
+					<label>Número:</label>
+					<input
+						#mNumber
+						type="number"
+						[(ngModel)]="form.number.value"
+						placeholder="Ej. 999999999"
+						maxlength="9"
+						(change)="validateNumber()"
+					/>
+				</div>
+			</div>
+		</app-tooltip>
+	</article>
+	<hr />
+	<section class="resume">
+		<div class="subtotal">
+			<div>SubTotal</div>
+			<div>S/. {{ order.subtotal | number: "1.2-2" }}</div>
+		</div>
+		<div class="taxes">
+			<div>Impuestos</div>
+			<div>S/. {{ order.taxes | number: "1.2-2" }}</div>
+		</div>
+		<div *ngIf="order.idPromo" class="discount">
+			<div>Total sin descuento</div>
+			<div>S/. {{ order.total_before_discount | number: "1.2-2" }}</div>
+		</div>
+		<div *ngIf="order.idPromo" class="discount">
+			<div>Desc {{ order.discount }}% {{ order.promoName }}</div>
+			<div>S/. {{ order.total_before_discount - order.total_after_discount | number: "1.2-2" }}</div>
+		</div>
+		<div class="total" *ngIf="esDesayunoHome == true">
+			<div>Total</div>
+			<div>S/. {{ order.total - +montoDesayuno | number: "1.2-2" }}</div>
+		</div>
+		<div class="Desayuno" *ngIf="esDesayunoHome == true">
+			<div>Desayuno</div>
+			<div>S/. {{ montoDesayuno | number: "1.2-2" }}</div>
+		</div>
+		<div class="total">
+			<div>Total Final</div>
+			<div>S/. {{ order.total | number: "1.2-2" }}</div>
+		</div>
+	</section>
+	<hr />
+	<div class="method">
+		<b>Seleccione un método de pago:</b>
+		<app-tooltip [show]="form.payment.invalid" tip="Debe seleccionar un medio de pago.">
+			<div class="payment" *ngFor="let x of paymtypes">
+				<input [(ngModel)]="form.payment.value" type="radio" [value]="x.id" name="paym" />
+				<label>{{ x.name }}</label>
+			</div>
+		</app-tooltip>
+	</div>
+</section>
+<section class="footer">
+	<div class="btn fill" (click)="saveOrder()">Finalizar</div>
+	<div class="labelback" (click)="goBack()">Quiero modificar mi orden</div>
+</section>

@@ -1,0 +1,6 @@
+<section class="categoria">
+	<img *ngIf="model.image != null" src="{{ model.image }}" alt="categoria" />
+	<div *ngIf="model.image == null" class="image"></div>
+	<span class="title">{{ model.name }}</span>
+	<app-product [product]="p" [category]="model" *ngFor="let p of model.products"></app-product>
+</section>

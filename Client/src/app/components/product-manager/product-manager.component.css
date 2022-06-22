@@ -1,0 +1,123 @@
+.title {
+	color: #a80d0d;
+}
+.divider {
+	border-color: #dd0000;
+}
+
+.filter {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 5px;
+}
+
+.filter article {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-left: 7px;
+}
+.row {
+	display: flex;
+	align-items: flex-start;
+}
+
+.row > div {
+	flex-basis: 100%;
+}
+.row > .products {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.form,
+.formModifier {
+	display: grid;
+	grid-template-columns: 80px 1fr;
+	gap: 3px;
+	padding: 7px;
+}
+.form .actions {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	grid-column: 1 / span 2;
+}
+.filter select {
+	width: 150px;
+	padding: 4px 8px;
+	border-radius: 10px;
+}
+
+.input {
+	width: 100%;
+	padding: 4px 8px;
+	border-radius: 10px;
+}
+.imageview {
+	display: block;
+	padding: 8px 0px;
+	max-width: 100%;
+	max-height: 150px;
+}
+textarea {
+	resize: vertical;
+}
+.mytable {
+	margin-top: 10px;
+	border-collapse: collapse;
+	font-family: montserrat;
+	font-size: 0.7rem;
+}
+
+.mytable td,
+.mytable th {
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.mytable td.center {
+	text-align: center;
+}
+.mytable td.right {
+	text-align: right;
+}
+.mytable th {
+	border-bottom-width: 3px;
+}
+
+.mytable input {
+	width: 80px;
+	text-align: center;
+	padding: 3px 5px;
+}
+
+.mytable select {
+	width: 100px;
+	text-align: center;
+	padding: 3px 5px;
+}
+
+.btn.edit,
+.btn.add {
+	border-radius: 5px;
+	border: none;
+}
+.btn.inline {
+	width: min-content;
+}
+
+.list {
+	list-style-position: inside;
+	padding-left: 0;
+}
+
+@media only screen and (max-width: 510px) {
+	.row {
+		flex-direction: column-reverse;
+		align-items: center;
+		justify-content: flex-start;
+	}
+}

@@ -1,0 +1,46 @@
+.title {
+	color: #a80d0d;
+}
+.divider {
+	border-color: #dd0000;
+}
+.config {
+	display: flex;
+	justify-content: center;
+}
+
+.config table {
+	margin-top: 10px;
+	max-width: fit-content;
+	border-collapse: collapse;
+}
+
+.config table td,
+.config table th {
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.config table input {
+	width: 80px;
+	text-align: center;
+	padding: 3px 5px;
+}
+
+.config table select {
+	width: 100px;
+	text-align: center;
+	padding: 3px 5px;
+}
+
+.btn.edit,
+.btn.add {
+	border-radius: 5px;
+	border: none;
+}
+
+@media only screen and (max-width: 600px) {
+	.config {
+		justify-content: start;
+	}
+}

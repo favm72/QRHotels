@@ -1,0 +1,4 @@
+<div class="tooltip">
+	<ng-content></ng-content>
+	<span *ngIf="show" [ngClass]="{ tip: type == 2, alert: type == 1 }">{{ tip }}</span>
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+    <header class="header" role="navigation">
+        <div class="logo">
+            <img src="../../../assets/images/logo3.png" />
+        </div>
+        <div class="right">
+            <div class="name">{{ fullname }}</div>
+            <div class="menubtn" (click)="showMenu()">
+                <fa-icon [icon]="menuicon" size="lg"></fa-icon>
+            </div>
+        </div>
+    </header>
+    <aside [ngClass]="{ menu: true, active: menuActive }" role="navigation">
+        <article [routerLink]="['/admin/main']" [routerLinkActive]="'active'">Pedidos</article>
+        <article [routerLink]="['/admin/products']" [routerLinkActive]="'active'">Productos</article>
+        <article [routerLink]="['/admin/productmgr']" [routerLinkActive]="'active'">Adm. Productos</article>
+        <article [routerLink]="['/admin/cart']" [routerLinkActive]="'active'">Carritos</article>
+        <article [routerLink]="['/admin/homemenu']" [routerLinkActive]="'active'">Home</article>
+        <article [routerLink]="['/admin/directory']" [routerLinkActive]="'active'">Directorio</article>
+        <article [routerLink]="['/admin/infoPage']" [routerLinkActive]="'active'">Páginas informativas</article>
+        <hr />
+        <article>
+            <div class="btn" (click)="logout()">LogOut</div>
+        </article>
+    </aside>
+    <section class="content">
+        <div class="page">
+            <router-outlet></router-outlet>
+        </div>
+    </section>
+    <footer class="footer">Todos los derechos reservados - Casa Andina Hoteles</footer>
+</div>

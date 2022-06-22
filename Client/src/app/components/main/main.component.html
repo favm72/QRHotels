@@ -1,0 +1,14 @@
+<section class="menu-container">
+    <ng-container *ngFor="let m of menu">
+        <ng-container *ngIf="m.linkUrl == 'slider'">
+            <section class="banner" *ngIf="pictures.length > 0">
+                <div class="title">{{ sliderTitle }}</div>
+                <app-slider (slide)="setTitle($event)" (click)="visualize($event)" [pictures]="pictures"></app-slider>
+            </section>
+        </ng-container>
+        <section *ngIf="m.linkUrl != 'slider'" class="banner {{ m.isHalf ? 'half' : '' }}">
+            <div *ngIf="m.title != null && m.title != ''" class="title">{{ m.title }}</div>
+            <img class="image" [src]="m.imageUrl" (click)="goToLink(m)" />
+        </section>
+    </ng-container>
+</section>

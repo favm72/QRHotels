@@ -1,0 +1,28 @@
+<div *ngIf="hotel" class="limiter" [style.background-image]="hotel ? 'url(' + hotel.image + ')' : ''">
+    <div class="container">
+        <div class="image">
+            <img [src]="hotel?.logo" alt="logo" />
+        </div>
+        <div class="title">Bienvenido a <br />{{ hotel ? hotel.title : "" }}</div>
+        <div class="form">
+            <div class="control">
+                <img class="lnr" src="../../../assets/images/user.png" />
+                <input class="input" type="text" name="text" placeholder="1er Apellido / LastName"
+                    [(ngModel)]="model.LastName" />
+            </div>
+
+            <div class="control">
+                <img class="lnr" src="../../../assets/images/clave.png" />
+                <input class="input" type="text" name="text" placeholder="No. habitación / Room Number"
+                    [(ngModel)]="model.RoomCode" />
+            </div>
+            <div class="terminos">
+                <input type="checkbox" [(ngModel)]="model.Conditions" />
+                <a href="https://www.casa-andina.com/es/terminos-y-condiciones" target="_blank">Acepto los términos y
+                    condiciones de uso.</a>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="control button" (click)="onLogin()">Login</div>
+    </div>
+</div>

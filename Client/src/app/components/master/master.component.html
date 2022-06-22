@@ -1,0 +1,23 @@
+<section class="tbar">
+    <div class="logo" (click)="onLogo()">
+        <img [src]="hotel?.logoSmall" alt="logo-small" />
+    </div>
+    <div class="name">
+        <div>Sr(a) {{ fullname }}</div>
+        <div>Hab: {{ roomcode }}</div>
+        <div class="menubtn" (click)="showMenu()">
+            <fa-icon [icon]="menuicon" size="lg"></fa-icon>
+        </div>
+        <div *ngIf="notifications.length > 0" class="bell" (click)="showNotifications()">
+            +{{ notifications.length }}&nbsp;&nbsp;<fa-icon [icon]="notificon" size="lg"></fa-icon>
+        </div>
+    </div>
+    <div class="menu {{ menuActive ? 'active' : '' }}">
+        <div class="item" routerLink="/master/myorders" routerLinkActive="active" (click)="menuActive = false">Mis
+            Pedidos</div>
+        <div class="item" routerLink="/master/main" routerLinkActive="active" (click)="menuActive = false">Principal
+        </div>
+        <!-- <div class="item" (click)="logout()">Logout</div> -->
+    </div>
+</section>
+<router-outlet></router-outlet>

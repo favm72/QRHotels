@@ -1,0 +1,63 @@
+<h1 class="title"><span class="back" (click)="goBack()">&lt;</span>Detalle</h1>
+<hr class="divider" />
+<app-order-item [order]="order" [showActions]="false" [isAdmin]="true"></app-order-item>
+<div class="container">
+	<section *ngIf="order.idProvider != 3" class="detail">
+		<app-detail [detail]="detail"></app-detail>
+	</section>
+	<section class="actions">
+		<div class="pending item" *ngIf="order.statusCode == 'P'">
+			<label *ngIf="order.idProvider != 3 && order.idProvider != 4" class="item">Tiempo Estimado:</label>
+			<label *ngIf="order.idProvider == 3 || order.idProvider == 4" class="item">&nbsp;</label>
+			<label class="item">Motivo de Rechazo</label>
+			<input
+				*ngIf="order.idProvider != 3 && order.idProvider != 4"
+				class="item input"
+				type="number"
+				min="5"
+				max="120"
+				[(ngModel)]="order.atentionTime"
+			/>
+			<label *ngIf="order.idProvider == 3 || order.idProvider == 4" class="item">&nbsp;</label>
+			<select class="item input" [(ngModel)]="order.idReason">
+				<option [ngValue]="-1">[Seleccione]</option>
+				<option *ngFor="let r of reasons" [ngValue]="r.id">{{ r.description }}</option>
+			</select>
+			<div class="item btn success" (click)="approveOpen()">Aprobar Pedido:</div>
+			<div class="item btn danger" (click)="rejectOpen()">Rechazar Pedido</div>
+		</div>
+		<ng-template [ngIf]="order.statusCode == 'A'">
+			<div class="item btn success" (click)="finalizeOpen()">Finalizar Pedido</div>
+		</ng-template>
+		<label class="item">Comentario:</label>
+		<textarea class="input item" rows="5" maxlength="200" [(ngModel)]="order.comment"></textarea>
+	</section>
+</div>
+<ng-template [ngIf]="order.statusCode == 'P'">
+	<app-modal #mApprove showFooter="true">
+		<div mheader><h3>CONFIRMAR</h3></div>
+		<div mbody>¿Está seguro de APROBAR el pedido N°{{ order.id }}?</div>
+		<div class="evenly" mfooter>
+			<div class="btn danger" (click)="mApprove.close()">Cancelar</div>
+			<div class="btn success" (click)="approve()">Aprobar</div>
+		</div>
+	</app-modal>
+	<app-modal #mReject showFooter="true">
+		<div mheader><h3>CONFIRMAR</h3></div>
+		<div mbody>¿Está seguro de RECHAZAR el pedido N°{{ order.id }}?</div>
+		<div class="evenly" mfooter>
+			<div class="btn danger" (click)="mReject.close()">Cancelar</div>
+			<div class="btn success" (click)="reject()">Rechazar</div>
+		</div>
+	</app-modal>
+</ng-template>
+<ng-template [ngIf]="order.statusCode == 'A'">
+	<app-modal #mFinalize showFooter="true">
+		<div mheader><h3>CONFIRMAR</h3></div>
+		<div mbody>¿Está seguro de FINALIZAR el pedido N°{{ order.id }}?</div>
+		<div class="evenly" mfooter>
+			<div class="btn danger" (click)="mFinalize.close()">Cancelar</div>
+			<div class="btn success" (click)="finalize()">Finalizar</div>
+		</div>
+	</app-modal>
+</ng-template>

@@ -1,0 +1,38 @@
+<section class="container">
+    <section class="body">
+        <div class="description" [innerHTML]="orderInfo?.description | rawhtml"></div>
+        <div class="form">
+            <label>Revisaremos nuestra disponibilidad, déjenos su celular para poder contactarnos y confirmarle el
+                servicio.</label>
+            <app-tooltip [show]="form.prefix.invalid || form.number.invalid"
+                tip="Debe ingresar un prefijo y un número válido.">
+                <div class="phone">
+                    <div class="prefix">
+                        <label>Prefijo:</label>
+                        <input #mPrefix type="number" [(ngModel)]="form.prefix.value" placeholder="Ej. 51" maxlength="2"
+                            (change)="validatePrefix()" />
+                    </div>
+                    <div class="number">
+                        <label>Número:</label>
+                        <input #mNumber type="number" [(ngModel)]="form.number.value" placeholder="Ej. 999999999"
+                            maxlength="9" (change)="validateNumber()" />
+                    </div>
+                </div>
+            </app-tooltip>
+            <div class="actions">
+                <button class="btn" (click)="openModal()">Solicitar</button>
+            </div>
+        </div>
+    </section>
+</section>
+
+<app-modal #mConfirm showFooter="true">
+    <div mheader>
+        <h4>Confirmar solicitud de limpieza</h4>
+    </div>
+    <div mbody>¿Está seguro de realizar la solicitud de limpieza?</div>
+    <div class="evenly" mfooter>
+        <div class="btn neutral" (click)="mConfirm.close()">Cancelar</div>
+        <div class="btn success" (click)="save()">Confirmar</div>
+    </div>
+</app-modal>

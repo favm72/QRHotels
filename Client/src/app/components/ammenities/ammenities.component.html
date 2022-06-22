@@ -1,0 +1,60 @@
+<section class="container">
+    <ng-container *ngIf="!cartMode">
+        <section class="title">
+            Bienvenidos:
+        </section>
+        <section class="introduction">
+            <p>Muchas gracias por preferir Casa Andina. Durante su estadía, es necesario que siga las indicaciones de
+                seguridad:
+            </p>
+            <ul>
+                <li>Uso de mascarillas en todas las áreas públicas del hotel.</li>
+                <li>Mantener el distanciamiento social a 1.5 metros de otros huéspedes.</li>
+                <li>Sus objetos de valor y/o dinero deben ser guardados en la caja de seguridad de su habitación. La
+                    recepción
+                    del hotel no aceptará la custodia de estos objetos.</li>
+            </ul>
+        </section>
+    </ng-container>
+    <section>
+        <h3 *ngIf="!cartMode" class="articles-title">Solicitudes a la habitación</h3>
+        <h3 *ngIf="cartMode" class="articles-title">Tu canasta</h3>
+        <div class="articles">
+            <article *ngFor="let x of productList" class="article">
+                <div class="image">
+                    <div class="image-container">
+                        <img alt="image" [src]="x.image" />
+                    </div>
+                </div>
+                <div class="name">{{x.name}}</div>
+                <div class="description">{{x.description}}</div>
+                <div class="counter">
+                    <div class="counter-container">
+                        <div>
+                            <button type="button" (click)="decrement(x)">
+                                <fa-icon [icon]="faMinus"></fa-icon>
+                            </button>
+                        </div>
+                        <span>{{x.quantity}}</span>
+                        <div>
+                            <button type="button" (click)="increment(x)">
+                                <fa-icon [icon]="faPlus"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <section class="actions">
+        <button *ngIf="!cartMode" class="button-canasta" (click)="changeMode(true)">Ver canasta
+            <div class="circle">{{ itemsCount }}</div>
+        </button>
+        <button *ngIf="cartMode" class="button-return" (click)="goBack()">Regresar
+        </button>
+        <button *ngIf="cartMode" class="button-reset" (click)="resetCart()">Vaciar canasta
+        </button>
+        <button *ngIf="cartMode" class="button-confirm" (click)="confirmCart()">Confirmar pedido
+        </button>
+    </section>
+</section>

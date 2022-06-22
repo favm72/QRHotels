@@ -1,0 +1,65 @@
+<section class="tbar">
+	<div class="back" (click)="goBack()">&lt;</div>
+	<div class="title">Consumos cargados a la habitación aún no cobrados</div>
+</section>
+<section *ngIf="intakeList.length == 0" class="container">
+	<div>No se encontraron Consumos</div>
+</section>
+<section *ngIf="intakeList.length > 0" class="container">
+	<article class="total">
+		<div *ngIf="totalAmount['SOL']">S/. {{ totalAmount["SOL"] | number: "1.2-2" }}</div>
+		<div *ngIf="totalAmount['USD']">$ {{ totalAmount["USD"] | number: "1.2-2" }}</div>
+	</article>
+	<div>*Incluye impuestos y servicios</div>
+	<section class="ticket" *ngFor="let group of intakeList; index as g">
+		<section *ngIf="group.ticketNo" class="info">
+			<article>
+				<label>Nro Ticket</label>
+				<div>{{ group.ticketNo }} / {{ group.year }}</div>
+			</article>
+			<article>
+				<label>Total</label>
+				<div>{{ group.currency == "SOL" ? "S/." : group.currency }} {{ group.total | number: "1.2-2" }}</div>
+			</article>
+			<article class="actions">
+				<div class="btn" (click)="goDetail(group)">Ver Detalle</div>
+			</article>
+		</section>
+		<table class="table">
+			<thead>
+				<th class="fecha">Fecha de Consumo</th>
+				<th>Servicio</th>
+				<th class="importe">Importe</th>
+			</thead>
+			<tbody>
+				<tr *ngIf="intakeList.length == 0">
+					<td colspan="4">No se encontraron Consumos</td>
+				</tr>
+				<tr *ngFor="let item of group.items; index as i">
+					<td class="center">{{ convertDate(item.intakeDate) | date: "MMM-dd" }}</td>
+					<td>
+						<div>{{ item.section }}</div>
+						<div>{{ item.service }}</div>
+					</td>
+					<td class="right">{{ item.amount | number: "1.2-2" }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<div class="mail">
+		<div *ngIf="showAgree" class="btn" (click)="openAgree()">Estoy Conforme</div>
+		<div class="btn" (click)="goMail()">¿Dudas sobre algún consumo?</div>
+	</div>
+</section>
+<ng-template [ngIf]="showAgree">
+	<app-modal #mConfirm showFooter="true">
+		<div mheader>
+			<h3>CONFIRMAR</h3>
+		</div>
+		<div mbody>¿Está conforme con el detalle de sus consumos?</div>
+		<div class="evenly" mfooter>
+			<div class="btn neutral" (click)="mConfirm.close()">Cancelar</div>
+			<div class="btn success" (click)="agreeOrder()">Aceptar</div>
+		</div>
+	</app-modal>
+</ng-template>

@@ -1,0 +1,163 @@
+@font-face {
+	font-family: Poppins-Regular;
+	src: url("assets/fonts/poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+	font-family: Poppins-Bold;
+	src: url("assets/fonts/poppins/Poppins-Bold.ttf");
+}
+
+@font-face {
+	font-family: Poppins-Medium;
+	src: url("assets/fonts/poppins/Poppins-Medium.ttf");
+}
+
+@font-face {
+	font-family: Raleway-Regular;
+	src: url("assets/fonts/raleway/Raleway-Regular.ttf");
+}
+
+@font-face {
+	font-family: Raleway-Black;
+	src: url("assets/fonts/raleway/Raleway-Black.ttf");
+}
+
+@font-face {
+	font-family: Raleway-SemiBold;
+	src: url("assets/fonts/raleway/Raleway-SemiBold.ttf");
+}
+
+@font-face {
+	font-family: Raleway-Bold;
+	src: url("assets/fonts/raleway/Raleway-Bold.ttf");
+}
+
+@font-face {
+	font-family: montserrat;
+	src: url("assets/fonts/montserrat/Montserrat-Regular.ttf");
+}
+
+@font-face {
+	font-family: arquitecta;
+	src: url("assets/fonts/arquitecta/arquitecta-regular.otf");
+}
+
+@font-face {
+	font-family: arquitectabold;
+	src: url("assets/fonts/arquitecta/arquitecta-bold.otf");
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+:root {
+	--info: #49a1e9;
+	--success: #d69c4f;
+	--danger: rgb(192, 58, 58);
+	--warning: #d69c4f;
+	--neutral: #555555;
+}
+
+body,
+html {
+	height: 100%;
+	font-family: arquitecta, sans-serif;
+}
+
+/* width */
+*::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 2.5px grey;
+	border-radius: 4px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+	background: #d69c4f;
+	border-radius: 4px;
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 5px 7px;
+	font-weight: bold;
+	border: none;
+	background-color: #d69c4f;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.btn.success {
+	color: white;
+	background-color: var(--success);
+}
+
+.btn.info {
+	color: white;
+	background-color: var(--info);
+}
+
+.btn.danger {
+	color: white;
+	background-color: var(--danger);
+}
+
+.btn.neutral {
+	color: white;
+	background-color: var(--neutral);
+}
+
+.btn.disabled {
+	opacity: 0.5;
+	cursor: initial;
+}
+
+.tag {
+	display: inline-flex;
+	align-items: center;
+	font-size: 0.7rem;
+	justify-content: center;
+	color: white;
+	background-color: grey;
+	border-radius: 5px;
+	padding: 3px 5px;
+}
+
+.tag.success {
+	background-color: var(--success);
+}
+.tag.danger {
+	background-color: var(--danger);
+}
+.tag.info {
+	background-color: var(--info);
+}
+.tag.warning {
+	background-color: var(--warning);
+}
+.tag.neutral {
+	background-color: var(--neutral);
+}
+
+.lista li {
+	padding-left: 2cm;
+}
+
+.evenly {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}

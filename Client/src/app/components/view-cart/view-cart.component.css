@@ -1,0 +1,123 @@
+.tbar {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: white;
+	width: 100%;
+	padding: 5px;
+	font-size: 1.3rem;
+}
+
+.tbar .back {
+	cursor: pointer;
+	padding: 5px 15px;
+}
+
+.tbar .title {
+	flex: 1;
+	text-align: center;
+}
+
+.order {
+	font-size: 0.8rem;
+	font-family: montserrat;
+	padding: 10px;
+}
+
+.order .item {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.order .item .description {
+	flex: 1;
+	padding: 0px 7px;
+}
+
+.order .item .description .name {
+	font-size: 1.2em;
+	font-weight: 400;
+}
+
+.order .item .description .comment {
+	font-size: 1em;
+	color: grey;
+}
+
+.order .remove {
+	margin-left: 10px;
+	font-size: 0.8rem;
+}
+
+.cart-body {
+	width: 100%;
+	padding-left: 15%;
+	padding-right: 15%;
+	padding-bottom: 88px;
+}
+
+.btn.sq {
+	margin-top: 20px;
+	width: 100%;
+	border-radius: 0%;
+}
+
+.labelback {
+	cursor: pointer;
+	width: 100%;
+	text-align: center;
+	color: var(--success);
+}
+
+.check {
+	padding: 10px 0px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	color: #555555;
+}
+
+.check img {
+	max-width: 50px;
+}
+
+textarea {
+	padding: 7px;
+	margin: 10px 0px;
+	width: 100%;
+	border-color: grey;
+	border-radius: 10px;
+	resize: vertical;
+	font-family: montserrat;
+}
+
+.btn.fill {
+	width: 100%;
+}
+
+.labelback {
+	cursor: pointer;
+	width: 100%;
+	text-align: center;
+	color: var(--success);
+}
+
+.footer {
+	font-size: 0.9rem;
+	font-family: montserrat;
+	border-top: solid 1px #ccc;
+	background-color: white;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	padding: 10px 15%;
+}
+
+.footer > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 35px;
+}

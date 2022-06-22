@@ -1,0 +1,35 @@
+<section class="tbar">
+	<div class="back" (click)="goBack()">&lt;</div>
+	<div class="title">MI PEDIDO</div>
+</section>
+<hr />
+<section class="cart-body">
+	<section *ngFor="let c of categories">
+		<h4>{{ c.name }}</h4>
+		<hr />
+		<section class="order" *ngFor="let p of c.products">
+			<div class="item">
+				<div class="quantity">x {{ p.quantity }}</div>
+				<div class="description">
+					<div class="name">{{ p.name }}</div>
+					<div class="comment">{{ p.comment }}</div>
+				</div>
+				<div class="price">S/. {{ p.totalPrice | number: "1.2-2" }}</div>
+				<div class="remove btn danger" (click)="remove(p)">
+					<fa-icon [icon]="removeIcon"></fa-icon>
+				</div>
+			</div>
+		</section>
+	</section>
+	<hr />
+	<textarea [(ngModel)]="comment" rows="5" maxlength="200" placeholder="Añade instrucciones o comentarios"></textarea>
+	<hr />
+	<section class="check">
+		<img src="../../../assets/images/mail.png" />
+		<span>Por favor, revise que su<br />orden esté completa..</span>
+	</section>
+</section>
+<section class="footer">
+	<div class="btn fill" (click)="continue()">Continuar</div>
+	<div class="labelback" (click)="goBack()">Quiero modificar mi orden</div>
+</section>

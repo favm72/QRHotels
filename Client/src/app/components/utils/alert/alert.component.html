@@ -1,0 +1,41 @@
+<div [ngClass]="{ myAlert: true, active: active, success: model.type == 'success', danger: model.type == 'danger', info: model.type == 'info' }">
+	<div class="modal">
+		<div *ngIf="model.type == 'danger'" class="header">
+			<span class="close" (click)="close()">&times;</span>
+			<h2>{{ model.title }}</h2>
+		</div>
+		<div class="body">
+			<ng-container *ngIf="model.options.newOrder">
+				<img src="../../../../assets/images/running.png" width="40" />
+				<div [ngSwitch]="model.options.provider" class="message">
+					<span *ngSwitchCase="9">
+						<p>Estamos procesando tu solicitud y pronto estaremos en contacto.</p>
+						<p>Revise sus notificaciones para ver el estado de su solicitud.</p>
+					</span>
+					<span *ngSwitchCase="4">
+						<p>Estamos procesando tu solicitud y pronto estaremos en contacto.</p>
+						<p>Revise sus notificaciones para ver el estado de su solicitud.</p>
+					</span>
+					<span *ngSwitchCase="3">
+						<p>Revisaremos nuestra disponibilidad, y en breve te responderemos.</p>
+						<p>Revise sus notificaciones para ver el estado de su solicitud.</p>
+					</span>
+					<span *ngSwitchDefault>
+						<p>En breve le informaremos el tiempo y estado de su pedido.</p>
+						<p>Revise sus notificaciones para ver el estado de su solicitud.</p>
+					</span>
+				</div>
+				<span class="btn" (click)="close()">Correcto</span>
+			</ng-container>
+			<ng-container *ngIf="!model.options.newOrder">
+				<fa-icon *ngIf="model.type == 'danger'" class="icon" [icon]="icon"></fa-icon>
+				<img *ngIf="model.type == 'info'" src="../../../../assets/images/ayudar.png" width="150" />
+				<img *ngIf="model.type == 'success'" src="../../../../assets/images/checked-data.png" width="150" />
+				<div class="message">
+					{{ model.message }}
+				</div>
+				<span *ngIf="model.type != 'danger'" class="btn" (click)="close()">Entendido</span>
+			</ng-container>
+		</div>
+	</div>
+</div>

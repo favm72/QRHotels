@@ -1,0 +1,61 @@
+<section class="order">
+    <div class="client">
+        <label>ID</label>
+        <div>{{ order.id }}</div>
+        <label>Hab</label>
+        <div>{{ order.roomCode }}</div>
+        <label>Tipo</label>
+        <div>{{ order.providerName }}</div>
+        <label *ngIf="![9, 10, 15].includes(order.idProvider)">Telf</label>
+        <div *ngIf="![9, 10, 15].includes(order.idProvider)">{{ order.phone }}</div>
+        <label *ngIf="order.idProvider == 9">Motivo</label>
+        <div *ngIf="order.idProvider == 9">{{ order.intakeReason }}</div>
+        <label>Fecha</label>
+        <div>{{ order.created | date: "dd-MMM-yyyy" }}</div>
+        <label>Hora</label>
+        <div>{{ order.created | date: "HH:mm" }}</div>
+        <label>Status</label>
+        <div>
+            <span [ngClass]="{
+					tag: true,
+					info: order.statusCode == 'P',
+					success: order.statusCode == 'A',
+					danger: order.statusCode == 'R',
+					neutral: order.statusCode == 'F'
+				}">{{ order.statusName | uppercase }}</span>
+        </div>
+        <label *ngIf="![9, 10, 15].includes(order.idProvider)">Total</label>
+        <div *ngIf="![9, 10, 15].includes(order.idProvider)">S/. {{ order.total | number: "1.2-2" }}</div>
+        <label *ngIf="isAdmin">Hotel</label>
+        <div *ngIf="isAdmin">{{ order.hotelCode }}</div>
+        <label *ngIf="order.paymType">Pago:</label>
+        <div *ngIf="order.paymType">{{ order.paymType }}</div>
+        <label *ngIf="order.idProvider == 3">Opción</label>
+        <div *ngIf="order.idProvider == 3" [innerHTML]="order.lateCheckout | rawhtml"></div>
+        <label *ngIf="order.idProvider == 4">Entrega</label>
+        <div *ngIf="order.idProvider == 4">{{ order.breakFastDate | date: "dd-MMM-yyyy" }}</div>
+        <label *ngIf="order.idProvider == 4">Horario</label>
+        <div *ngIf="order.idProvider == 4">{{ order.schedule }}</div>
+        <div *ngIf="isAdmin" class="spanall">
+            <label>Nombre</label> {{ order.gender == "M" ? "Sr. " : "" }}{{ order.gender == "F" ? "Sra. " : "" }}{{
+            order.fullName }}
+        </div>
+        <div *ngIf="order.description != null && order.description.length > 0" class="spanall"><label>Comentario</label>
+            {{ order.description }}</div>
+        <div *ngIf="order.comment != null && order.comment.length > 0 && order.statusCode != 'P'" class="spanall">
+            <label>Respuesta del Hotel</label> {{ order.comment }}
+        </div>
+    </div>
+    <div class="timer">
+        <!-- <label>Transcurrido</label> -->
+        <app-timer *ngIf="['F', 'R'].includes(order.statusCode)" [order]="order" [type]="'duration'"></app-timer>
+        <!-- <label *ngIf="order.statusCode == 'A'">Count Down</label> -->
+        <app-timer *ngIf="order.statusCode == 'A'" [order]="order" [type]="'countdown'"></app-timer>
+    </div>
+    <div *ngIf="isAdmin && showActions" class="actions">
+        <div class="btn" (click)="goToDetail()">ver</div>
+    </div>
+    <div *ngIf="!isAdmin && showActions" class="actions">
+        <div class="btn" (click)="goToMyDetail()">ver</div>
+    </div>
+</section>

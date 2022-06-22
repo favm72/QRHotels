@@ -1,0 +1,33 @@
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	column-gap: 10px;
+}
+
+.provider .content {
+	height: 70vh;
+	padding: 0 4px;
+	overflow-y: auto;
+}
+
+.provider > label {
+	color: var(--danger);
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.category {
+	padding-top: 10px;
+}
+
+.category > label {
+	color: var(--neutral);
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.product {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}

@@ -1,0 +1,12 @@
+<section class="tbar">
+    <div class="back" (click)="goBack()">&lt;</div>
+    <div class="image" (click)="onLogo()">
+        <img [src]="hotel?.logoSmall" alt="logo-small" />
+    </div>
+    <article *ngIf="showGotoCart" class="cart" (click)="goToCart()">
+        <div>Ver Carrito</div>
+        <img src="../../../assets/images/carrito.png" alt="carrito" />
+        <app-countmark *ngIf="elements > 0" [count]="elements"></app-countmark>
+    </article>
+</section>
+<app-category [category]="c" *ngFor="let c of categories"></app-category>

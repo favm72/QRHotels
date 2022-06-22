@@ -1,0 +1,38 @@
+.details {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+}
+
+.details > div {
+	padding: 8px;
+}
+
+.details img {
+	max-height: 50px;
+}
+
+.details .product {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.details .summary {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+}
+
+.details .summary > label {
+	font-weight: bold;
+}
+
+.details .summary > div {
+	text-align: end;
+}
+
+.details .summary .comment {
+	text-align: left;
+	grid-column: 1 / span 2;
+}

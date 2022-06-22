@@ -1,0 +1,124 @@
+<h2 class="title">Filtros</h2>
+<hr class="divider" />
+<section class="filter">
+    <article>
+        <label>Hotel</label>
+        <select [(ngModel)]="currentHotel" (change)="onChangeHotel()">
+            <option [value]="''">[SELECCIONAR]</option>
+            <option *ngFor="let h of hotels" [ngValue]="h.id">{{ h.description }}</option>
+        </select>
+    </article>
+    <ng-container *ngIf="currentHotel">
+        <article>
+            <label>&nbsp;</label>
+            <button class="btn info" type="button" (click)="addDirectory()">Agregar</button>
+        </article>
+        <article>
+            <label>&nbsp;</label>
+            <button class="btn info" type="button" (click)="openUpsertModal()">Actualizar Cabecera</button>
+        </article>
+    </ng-container>
+</section>
+<h2 class="title">Administrar directorio de servicios</h2>
+<hr class="divider" />
+<section class="table-container">
+    <table class="mytable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Orden</th>
+                <th>Nombre</th>
+                <th>Activo</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="items.length == 0">
+                <td colspan="6">No se encontraron resultados.</td>
+            </tr>
+            <tr *ngFor="let x of items; index as i">
+                <td class="right">
+                    <label>{{ x.id }}</label>
+                </td>
+                <td class="right">
+                    <label>{{ x.orderNo }}</label>
+                </td>
+                <td>
+                    <label>{{ x.name }}</label>
+                </td>
+                <td class="center">
+                    <label>{{ x.active ? "SÍ" : "NO" }}</label>
+                </td>
+                <td>
+                    <button type="button" (click)="editDirectory(x)" class="btn info edit">
+                        <fa-icon [icon]="editIcon"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<app-modal #modalForm showFooter="true" width="95%">
+    <div class="inmodal" mheader>
+        <h4>Servicio</h4>
+    </div>
+    <div class="inmodal overflow" mbody>
+        <div class="form">
+            <label>Hotel</label>
+            <select class="input" [disabled]="true">
+                <option>{{ hotelDescription }}</option>
+            </select>
+            <label>Nombre</label>
+            <input class="input" [(ngModel)]="form.name.value" type="text" />
+            <label>Contenido</label>
+            <quill-editor [styles]="{height: '100px'}" [(ngModel)]="form.content.value"></quill-editor>
+            <label>Orden</label>
+            <input class="input" [(ngModel)]="form.orderNo.value" type="number" />
+            <label>Activo</label>
+            <app-switch [checked]="form.active.value" (change)="form.active.value = $event.target.checked"></app-switch>
+            <label>Icon:</label>
+            <div>
+                <app-uploader [(myfile)]="form.icon64.value" [(name)]="form.iconname.value"></app-uploader>
+                <img *ngIf="form.iconUrl.value?.length > 0" [src]="form.iconUrl.value" class="imageview" alt="image" />
+            </div>
+            <label>Banner:</label>
+            <div>
+                <app-uploader [(myfile)]="form.image64.value" [(name)]="form.filename.value"></app-uploader>
+                <img *ngIf="form.bannerUrl.value?.length > 0" [src]="form.bannerUrl.value" class="imageview"
+                    alt="image" />
+            </div>
+        </div>
+    </div>
+    <div class="evenly inmodal" mfooter>
+        <div class="btn neutral" (click)="modalForm.close()">Cancelar</div>
+        <div class="btn success" (click)="saveDirectory()">{{ currentItem ? 'Actualizar' : 'Guardar' }}</div>
+    </div>
+</app-modal>
+
+
+<app-modal #modalFormHead showFooter="true" width="95%">
+    <div class="inmodal" mheader>
+        <h4>Directorio</h4>
+    </div>
+    <div class="inmodal" mbody>
+        <div class="form">
+            <label>Hotel</label>
+            <select class="input" [disabled]="true">
+                <option>{{ hotelDescription }}</option>
+            </select>
+            <label>Introducción</label>
+            <quill-editor [styles]="{height: '100px'}" [(ngModel)]="formHead.introduction.value"></quill-editor>
+            <label>Banner:</label>
+            <div>
+                <app-uploader [(myfile)]="formHead.image64.value" [(name)]="formHead.filename.value"></app-uploader>
+                <img *ngIf="formHead.bannerUrl.value?.length > 0" [src]="formHead.bannerUrl.value" class="imageview"
+                    alt="image" />
+            </div>
+        </div>
+    </div>
+    <div class="evenly inmodal" mfooter>
+        <div class="btn neutral" (click)="modalFormHead.close()">Cancelar</div>
+        <div class="btn success" (click)="saveDirectoryHead()">Actualizar</div>
+    </div>
+</app-modal>

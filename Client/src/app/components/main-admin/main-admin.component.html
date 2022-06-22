@@ -1,0 +1,64 @@
+<h1 class="title">Filtros</h1>
+<hr class="divider" />
+<div class="filters">
+	<div class="filter">
+		<label>Estado:</label>
+		<select [(ngModel)]="filters.statusCode" class="input">
+			<option value="T">&lt;TODOS&gt;</option>
+			<option value="PA">PENDIENTES Y APROBADOS</option>
+			<option value="P">PENDIENTE</option>
+			<option value="A">APROBADO</option>
+			<option value="R">RECHAZADO</option>
+			<option value="F">FINALIZADO</option>
+		</select>
+	</div>
+	<div class="filter">
+		<label>Hotel:</label>
+		<select [(ngModel)]="filters.hotelCode" class="input">
+			<option value="">&lt;TODOS&gt;</option>
+			<option *ngFor="let h of hotels" [ngValue]="h.id">{{ h.description }}</option>
+		</select>
+	</div>
+	<div class="filter">
+		<label>Tipo:</label>
+		<!-- <select [(ngModel)]="filters.idProvider" class="input">
+			<option [ngValue]="0">&lt;TODOS&gt;</option>
+			<option *ngFor="let p of providers" [ngValue]="p.id">{{ p.description }}</option>
+		</select> -->
+		<!-- [(ngModel)]="filters.idProvider" -->
+		<ng-multiselect-dropdown
+			[placeholder]="'Tipo de servicio'"
+			[settings]="dropdownSettings"
+			[data]="providers"
+			[(ngModel)]="filters.idProvider"
+			(onSelect)="onItemSelect($event)"
+		>
+		</ng-multiselect-dropdown>
+	</div>
+	<div class="filter">
+		<label>Habitación:</label>
+		<input [(ngModel)]="filters.roomCode" class="input" />
+	</div>
+	<div class="filter">
+		<label>Nombre:</label>
+		<input [(ngModel)]="filters.firstName" class="input" />
+	</div>
+	<div class="filter">
+		<label>Apellido:</label>
+		<input [(ngModel)]="filters.lastName" class="input" />
+	</div>
+	<div class="filter">
+		<label>&nbsp;</label>
+		<div class="btn info" (click)="updateFilters()">Buscar&nbsp;<fa-icon [icon]="icon"></fa-icon></div>
+	</div>
+</div>
+<div class="header">
+	<h1 class="title">Pedidos</h1>
+	<section class="pagination">
+		<span class="next btn info" (click)="prev()">&nbsp;&lt;&nbsp;</span>
+		<input class="input current" type="number" min="0" [(ngModel)]="filters.currentPage" />
+		<span class="prev btn info" (click)="next()">&nbsp;&gt;&nbsp;</span>
+	</section>
+</div>
+<hr class="divider" />
+<app-order-item *ngFor="let r of orders" [order]="r" [isAdmin]="true"></app-order-item>

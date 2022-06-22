@@ -1,0 +1,68 @@
+.tbar {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: white;
+	width: 100%;
+	padding: 5px;
+	font-family: montserrat;
+	font-size: 1.1rem;
+	border-bottom: 1px solid #ccc;
+}
+
+.tbar .back {
+	cursor: pointer;
+	padding: 5px 15px;
+}
+
+.tbar .title {
+	flex: 1;
+	text-align: center;
+}
+
+.container {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	font-family: montserrat;
+	width: 100%;
+}
+.container > * {
+	max-width: 400px;
+	width: 100%;
+}
+
+.table {
+	border-collapse: collapse;
+	font-size: 0.8rem;
+}
+
+.table > thead {
+	background-color: #ccc;
+}
+
+.table th,
+.table td {
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.table td.center {
+	text-align: center;
+}
+
+.table td.right {
+	text-align: right;
+}
+
+.table td.bold {
+	font-weight: 700;
+}
+.table td.description {
+	font-size: 0.7rem;
+}
+.intake-data {
+	padding: 8px;
+}

@@ -1,0 +1,9 @@
+<div class="container">
+	<h1 class="title"><span class="back" (click)="goBack()">&lt;</span>Detalle</h1>
+	<hr class="divider" />
+	<app-order-item [order]="order" [isAdmin]="false" [showActions]="false"></app-order-item>
+	<div class="center">
+		<div *ngIf="order.reason != null" class="reason btn danger">{{ order.reason }}</div>
+		<app-detail [detail]="detail"></app-detail>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+.tbar {
+	display: flex;
+	width: 100%;
+	background-color: black;
+	align-items: center;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	padding: 0px;
+	z-index: 2;
+}
+.tbar .image {
+	cursor: pointer;
+	text-align: center;
+	flex: 1;
+}
+
+.tbar .image img {
+	max-width: 120px;
+}
+
+.tbar .cart img {
+	width: 25px;
+	height: 25px;
+	margin: 0px 10px;
+}
+
+.tbar .cart {
+	font-size: 1.2rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	color: black;
+	text-align: center;
+	padding: 4px 10px;
+	background-color: white;
+	cursor: pointer;
+}
+
+.tbar .back {
+	padding: 5px 10px;
+	cursor: pointer;
+	color: white;
+	font-weight: bold;
+}

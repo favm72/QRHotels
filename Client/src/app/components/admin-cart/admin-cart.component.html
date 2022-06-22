@@ -1,0 +1,72 @@
+<h1 class="title">Configurar Carritos</h1>
+<hr class="divider" />
+<div class="config">
+	<table>
+		<thead>
+			<tr>
+				<th>Proveedor</th>
+				<th>Hotel</th>
+				<th>Inicio</th>
+				<th>Fin</th>
+				<th>Activo</th>
+				<th>Edit</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let x of configs; index as i">
+				<td>
+					<!-- <select disabled [(ngModel)]="x.idProvider">
+                        <option *ngFor="let p of providers" [value]="p.id">{{ p.description }}</option>
+                    </select> -->
+					<label>{{ x.provider }}</label>
+				</td>
+				<td>
+					<!-- <select disabled [(ngModel)]="x.hotelCode">
+                        <option *ngFor="let h of hotels" [value]="h.id">{{ h.description }}</option>
+                    </select> -->
+					<label>{{ x.hotel }}</label>
+				</td>
+				<td>
+					<input type="text" appInputTime maxlength="5" [(ngModel)]="x.hourStart" />
+				</td>
+				<td>
+					<input type="text" appInputTime maxlength="5" [(ngModel)]="x.hourEnd" />
+				</td>
+				<td>
+					<input type="checkbox" [(ngModel)]="x.active" />
+				</td>
+				<td>
+					<button type="button" (click)="editConfig(i)" class="btn info edit">
+						<fa-icon [icon]="editIcon"></fa-icon>
+					</button>
+				</td>
+			</tr>
+			<tr class="tradd">
+				<td>
+					<select [(ngModel)]="toadd.idProvider">
+						<option *ngFor="let p of providers" [value]="p.id">{{ p.description }}</option>
+					</select>
+				</td>
+				<td>
+					<select [(ngModel)]="toadd.hotelCode">
+						<option *ngFor="let h of hotels" [value]="h.id">{{ h.description }}</option>
+					</select>
+				</td>
+				<td>
+					<input type="text" appInputTime maxlength="5" [(ngModel)]="toadd.hourStart" />
+				</td>
+				<td>
+					<input type="text" appInputTime maxlength="5" [(ngModel)]="toadd.hourEnd" />
+				</td>
+				<td>
+					<input type="checkbox" [(ngModel)]="toadd.active" />
+				</td>
+				<td>
+					<button type="button" (click)="addConfig()" class="btn success add">
+						<fa-icon [icon]="addIcon"></fa-icon>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

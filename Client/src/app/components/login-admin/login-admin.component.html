@@ -1,0 +1,22 @@
+<div class="limiter">
+    <div class="container">
+        <div class="image">
+            <img src="../../../assets/images/logo.png" />
+        </div>
+        <div class="title">Bienvenido a <br />Casa Andina</div>
+        <div class="form">
+            <div class="control">
+                <img class="lnr" src="../../../assets/images/user.png" />
+                <input class="input" type="text" placeholder="Usuario" [(ngModel)]="model.UserName" />
+            </div>
+
+            <div class="control">
+                <img class="lnr" src="../../../assets/images/clave.png" />
+                <input class="input" type="password" placeholder="Password" [(ngModel)]="model.Password"
+                    (keyup.enter)="onLogin()" />
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="control button" (click)="onLogin()">Login</div>
+    </div>
+</div>

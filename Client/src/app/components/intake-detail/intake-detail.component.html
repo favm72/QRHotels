@@ -1,0 +1,58 @@
+<section class="tbar">
+	<div class="back" (click)="goBack()">&lt;</div>
+	<div class="title">Detalle</div>
+</section>
+<section *ngIf="currentIntake" class="container">
+	<article class="intake-data">
+		<div>Ticket {{ currentIntake.ticketNo }}/{{ currentIntake.year }} {{ currentIntake.items[0].section }}</div>
+	</article>
+	<table class="table">
+		<thead>
+			<th>Cant.</th>
+			<th>Producto</th>
+			<th>Importe</th>
+		</thead>
+		<tbody>
+			<tr *ngIf="detailList.length == 0">
+				<td colspan="3">Detalle vacío</td>
+			</tr>
+			<tr *ngFor="let item of detailList; index as i">
+				<td class="center">1</td>
+				<td class="description">{{ item.product }}</td>
+				<td class="right">{{ item.amount | number: "1.2-2" }}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Sub Total</td>
+				<td class="right bold">{{ totals.amount | number: "1.2-2" }}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Descuento</td>
+				<td class="right bold">{{ totals.discount | number: "1.2-2" }}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Recargo desayuno a la habitación</td>
+				<td class="right bold">{{ totals.surcharge | number: "1.2-2" }}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Base Imponible</td>
+				<td class="right bold">{{ totals.base | number: "1.2-2" }}</td>
+			</tr>
+			<tr *ngIf="hotelCode !== 'PUCAL'">
+				<td colspan="2">IGV 18%</td>
+				<td class="right bold">{{ totals.tax | number: "1.2-2" }}</td>
+			</tr>
+			<tr *ngIf="hotelCode !== 'PUCAL'">
+				<td colspan="2">Servicios 10%</td>
+				<td class="right bold">{{ totals.service | number: "1.2-2" }}</td>
+			</tr>
+			<tr *ngIf="hotelCode === 'PUCAL'">
+				<td colspan="2">Impuestos 5%</td>
+				<td class="right bold">{{ totals.base * 0.05 | number: "1.2-2" }}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Total</td>
+				<td class="right bold">{{ currentIntake.total | number: "1.2-2" }}</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

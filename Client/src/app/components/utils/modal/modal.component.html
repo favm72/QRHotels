@@ -1,0 +1,14 @@
+<div class="modalbg {{ active ? 'active' : '' }}">
+    <div class="modal {{ type }}" [style.width]="width == null ? 'auto' : width">
+        <div class="header">
+            <span class="close" (click)="close()">&times;</span>
+            <ng-content select="[mheader]"></ng-content>
+        </div>
+        <div class="body">
+            <ng-content select="[mbody]"></ng-content>
+        </div>
+        <div *ngIf="showFooter" class="footer">
+            <ng-content select="[mfooter]"></ng-content>
+        </div>
+    </div>
+</div>
