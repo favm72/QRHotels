@@ -30,10 +30,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security", "Security\Securi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataOracleLayer", "DataOracleLayer\DataOracleLayer.csproj", "{11127721-1557-459B-9ABD-376B79F54CEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRWorker", "QRWorker\QRWorker.csproj", "{CA62C34A-FF87-418D-80C2-DDA850E22EC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRWorker", "QRWorker\QRWorker.csproj", "{CA62C34A-FF87-418D-80C2-DDA850E22EC1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DAA69E20-C806-4EFC-BFD4-E0DA0D93BBD6} = {DAA69E20-C806-4EFC-BFD4-E0DA0D93BBD6}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InRoomWorker", "InRoomWorker\InRoomWorker.csproj", "{053700CD-CE26-4A2A-A80B-BE8A8A07667B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{CA62C34A-FF87-418D-80C2-DDA850E22EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA62C34A-FF87-418D-80C2-DDA850E22EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA62C34A-FF87-418D-80C2-DDA850E22EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053700CD-CE26-4A2A-A80B-BE8A8A07667B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053700CD-CE26-4A2A-A80B-BE8A8A07667B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053700CD-CE26-4A2A-A80B-BE8A8A07667B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053700CD-CE26-4A2A-A80B-BE8A8A07667B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

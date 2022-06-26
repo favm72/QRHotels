@@ -10,5 +10,7 @@ namespace QRWorker
         public string HotelCode { get; set; }
         public string SoundPath { get; set; }
         public int Delay { get; set; }
+        public string GetHotelsUrl { get; set; }
+        public string HasPendingOrdersUrl { get; set; }
     }
 }

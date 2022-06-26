@@ -263,17 +263,6 @@ namespace LogicLayer
 			});
 		}
 
-		public async Task<bool> HasPendingOrders(string hotelCode)
-        {
-			return await (from o in context.OrderHead
-						  join r in context.Reservation on o.IdReservation equals r.Id
-						  join s in context.OrderStatus on o.Id equals s.IdOrderHead
-						  where s.Id == context.OrderStatus.Where(z => z.IdOrderHead.Value == o.Id).Max(z => z.Id)
-						  && s.StatusCode == "P"
-						  && r.HotelCode == hotelCode
-						  select 1).AnyAsync();
-        }
-
 		public async Task<ResponseBE> NotificationsByClient(OrderBE orderBE)
 		{
 			return await GetResponse(orderBE, MyRole.Client, async (response) =>

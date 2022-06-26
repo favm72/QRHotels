@@ -1,13 +1,7 @@
-using DataLayer;
-using LogicLayer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,22 +9,14 @@ namespace QRWorker
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<Worker> logger;
         private readonly WorkerOptions options;
+        private readonly QRService service;
         public Worker(ILogger<Worker> logger, WorkerOptions options)
         {
-            _logger = logger;
+            this.logger = logger;
             this.options = options;
-        }
-
-        public MyContext UseContext()
-        {
-            var storage = this.options.Connection;
-            var optionsBuilder = new DbContextOptionsBuilder<MyContext>();
-            optionsBuilder.UseSqlServer(storage);
-            //optionsBuilder.LogTo(filter, (s) => { System.IO.File.AppendAllText("test.txt", "\n" + s); });
-            var options = optionsBuilder.Options;
-            return new MyContext(options);
+            service = new QRService(options, logger);
         }
 
         public void PlaySound()
@@ -39,22 +25,18 @@ namespace QRWorker
             {
                 if (!System.IO.File.Exists(options.SoundPath))
                 {
-                    _logger.LogInformation("sound file not found");
+                    logger.LogInformation("sound file not found");
                     return;
                 }
 
-                var wave = new AudioFileReader(options.SoundPath);
-                OffsetSampleProvider offsetSampleProvider = new OffsetSampleProvider(wave);
-                //offsetSampleProvider.SkipOver = TimeSpan.FromSeconds(timeFrom);
-                //offsetSampleProvider.Take = TimeSpan.FromSeconds(timeTo - timeFrom);
+                var wave = new AudioFileReader(options.SoundPath);              
                 var outputSound = new WaveOut();
-                outputSound.Init(offsetSampleProvider);
-                outputSound.Play();
-                _logger.LogInformation("sound played");
+                outputSound.Init(wave);
+                outputSound.Play();                
             }
             catch (Exception ex)
             {
-                _logger.LogInformation("error playing file", ex.Message);
+                logger.LogInformation("error playing file", ex.Message);
             }            
         }
 
@@ -63,19 +45,38 @@ namespace QRWorker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(options.Delay, stoppingToken);
-                using (var context = UseContext())
+                try
                 {
-                    var orderBL = new OrderBL(context);
-                    var hasPendingOrders = await orderBL.HasPendingOrders(options.HotelCode);
-                    _logger.LogInformation("has pending orders", hasPendingOrders);
-                    if (hasPendingOrders)
+                    await Task.Delay(options.Delay, stoppingToken);                 
+                    if (string.IsNullOrWhiteSpace(options.HasPendingOrdersUrl))
                     {
-                        PlaySound();                        
+                        logger.LogInformation("HasPendingOrdersUrl is empty");
+                        continue;
                     }
+                    if (string.IsNullOrWhiteSpace(options.HotelCode))
+                    {
+                        logger.LogInformation("HotelCode is empty");
+                        continue;
+                    }
+                    if (string.IsNullOrWhiteSpace(options.SoundPath))
+                    {
+                        logger.LogInformation("SoundPath is empty");
+                        continue;
+                    }
+                    if (!System.IO.File.Exists(options.SoundPath))
+                    {
+                        logger.LogInformation($"mp3 file does not exists in path {options.SoundPath}");
+                        continue;
+                    }
+                    
+                    bool playSound = await service.HasPendingOrders(options.HotelCode);
+                    if (playSound)
+                        PlaySound();
                 }
-
+                catch (Exception ex)
+                {
+                    logger.LogInformation(ex.Message);
+                }                        
             }
         }
     }
