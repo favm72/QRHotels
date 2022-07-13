@@ -15,6 +15,8 @@ namespace InRoomWorker
         QRService service;
         ConfigService config;
         bool serviceActive = false;
+
+
         public MainWindow()
         {
             config = new ConfigService();
@@ -26,11 +28,11 @@ namespace InRoomWorker
         public async Task LoadHotels()
         {
             await config.Read();
-            ddlHotel.Items.Clear();           
+            ddlHotel.Items.Clear();
             var data = await service.GetHotels();
             foreach (var item in data)
             {
-                ddlHotel.Items.Add(item); 
+                ddlHotel.Items.Add(item);
             }
         }
 
@@ -62,9 +64,9 @@ namespace InRoomWorker
                 try
                 {
                     int delay;
-                    bool parsed = int.TryParse(txtDelay.Text, out delay);
-                    if (!parsed)
-                        delay = 10000;
+                    //bool parsed = int.TryParse(txtDelay.Text, out delay);
+                    //if (!parsed)
+                    delay = 10000;
                     await Task.Delay(delay);
 
                     await config.Read();
@@ -106,7 +108,7 @@ namespace InRoomWorker
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             btnStart.Content = "Start";
-            await LoadHotels();           
+            await LoadHotels();
         }
 
         private async void btnStart_Click(object sender, RoutedEventArgs e)

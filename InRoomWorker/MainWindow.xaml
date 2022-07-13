@@ -74,16 +74,15 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0">Delay</TextBlock>
-            <TextBox x:Name="txtDelay" Grid.Row="1"></TextBox>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="16">Alerta Inroom</TextBlock>
         </Grid>
         <Grid Grid.Row="1" Margin="0,10,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0">Mp3 file:</TextBlock>
-            <TextBox x:Name="txtPath" Grid.Row="1"></TextBox>
+            <TextBlock Grid.Row="0" Text="Archivo mp3:"/>
+            <TextBox x:Name="txtPath" Grid.Row="1" Text="C:\AlertaInroom\notificacion.mp3" IsReadOnly="True"></TextBox>
         </Grid>
         <Grid Grid.Row="2" Margin="0,10,0,0">
             <Grid.RowDefinitions>
