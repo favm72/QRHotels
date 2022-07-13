@@ -102,6 +102,8 @@ namespace LogicLayer
 		{
 			return await GetResponseTransaction(orderBE, MyRole.Client, context, async (response) =>
 			{
+				if (orderBE.IdProvider <= 0)
+					throw new Exception("Error de solicitud, por favor intente nuevamente.");
 
 				var reservation = await (from r in context.Reservation
 										 where r.Active && r.Id == orderBE.TokenBE.Id
